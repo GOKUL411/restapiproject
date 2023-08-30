@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.project.model.ApplianceModel;
 import com.example.project.service.ApplianceService;
 
+
 @RestController
 public class ApplianceController {
 	@Autowired
@@ -102,4 +103,28 @@ public class ApplianceController {
 			
 
 		}
+				
+				@GetMapping("/sortAsc/{name}")
+				public List<ApplianceModel> sortAsc(@PathVariable("name") String name) {
+				    return aserv.sortByAsc(name);
+				}
+
+				@GetMapping("/sortDsc/{name}")
+				public List<ApplianceModel> sortDsc(@PathVariable("name") String name) {
+				    return aserv.sortByDsc(name);
+				}
+				 @GetMapping("/pagination/{num}/{size}")
+				    public List<ApplianceModel> paginationEx(@PathVariable("num") int num, @PathVariable("size") int size) {
+				        return aserv.pagination(num, size);
+				    }
+
+				    @GetMapping("/paginationAndSort/{num}/{size}/{name}")
+				    public List<ApplianceModel> paginationAndSort(@PathVariable("num") int num,
+				                                              @PathVariable("size") int size,
+				                                              @PathVariable("name") String name) {
+				        return aserv.paginationAndSorting(num, size, name);
+				    }	
+				   
+				   
+
 }

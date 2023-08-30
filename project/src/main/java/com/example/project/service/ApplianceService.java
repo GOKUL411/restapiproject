@@ -4,10 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import com.example.project.model.ApplianceModel;
 import com.example.project.repository.ApplianceRepo;
+
 
 @Service
 public class ApplianceService {
@@ -68,5 +73,28 @@ public class ApplianceService {
 		// TODO Auto-generated method stub
 		
 	}
+	//sorting
+		public List<ApplianceModel> sortByAsc(String propertyName) {
+		    return arepo.findAll(Sort.by(propertyName).ascending());
+		}
+
+		public List<ApplianceModel> sortByDsc(String propertyName) {
+		    return arepo.findAll(Sort.by(propertyName).descending());
+		}
+		
+		//pagination
+		public List<ApplianceModel>pagination(int pageNo,int pageSize)
+		{
+			Page<ApplianceModel> cont=arepo.findAll(PageRequest.of(pageNo, pageSize));
+			return cont.getContent();
+		}
+		//pagination and sorting 
+		public List<ApplianceModel>paginationAndSorting(int pageNo,int pageSize,String propertyName)
+		{
+			Page<ApplianceModel> cont=arepo.findAll(PageRequest.of(pageNo, pageSize,Sort.by(propertyName)));
+			return cont.getContent();
+		}
+		
+		
 
 }

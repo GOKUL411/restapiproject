@@ -1,34 +1,32 @@
 package com.example.project.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="appliancemodel")
+@Table(name = "appliancemodel")
 public class ApplianceModel {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "Customerid")
 	private int CustomerId; 
 	@Column(name = "Customername")
 	private String customerName;
-	@Column(name = "Applianceid")
-	private int applianceId;
-	@Column(name = "Appliancetype")
-	private String applianceType;
-	@Column(name = "Purchasedate")
-	private int purchaseDate;
-	@Column(name = "Warrantystarttime")
-	private int  warrantystartTime;
-	@Column(name = "Warrantyendtime")
-	private int  warrantyendTime;
-	@Column(name = "Problem")
-	private String problemDescription;
+	@Column(name = "Place")
+	private String place;
 	@Column(name = "Mobileno")
 	private int mobileNo;
+	@OneToMany(mappedBy = "appliance", cascade = CascadeType.ALL)
+    private List<RequestModel> requests;
 	public int getCustomerId() {
 		return CustomerId;
 	}
@@ -41,47 +39,23 @@ public class ApplianceModel {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public int getApplianceId() {
-		return applianceId;
+	public String getPlace() {
+		return place;
 	}
-	public void setApplianceId(int applianceId) {
-		this.applianceId = applianceId;
-	}
-	public String getApplianceType() {
-		return applianceType;
-	}
-	public void setApplianceType(String applianceType) {
-		this.applianceType = applianceType;
-	}
-	public int getPurchaseDate() {
-		return purchaseDate;
-	}
-	public void setPurchaseDate(int purchaseDate) {
-		this.purchaseDate = purchaseDate;
-	}
-	public int getWarrantystartTime() {
-		return warrantystartTime;
-	}
-	public void setWarrantystartTime(int warrantystartTime) {
-		this.warrantystartTime = warrantystartTime;
-	}
-	public int getWarrantyendTime() {
-		return warrantyendTime;
-	}
-	public void setWarrantyendTime(int warrantyendTime) {
-		this.warrantyendTime = warrantyendTime;
-	}
-	public String getProblemDescription() {
-		return problemDescription;
-	}
-	public void setProblemDescription(String problemDescription) {
-		this.problemDescription = problemDescription;
+	public void setPlace(String place) {
+		this.place = place;
 	}
 	public int getMobileNo() {
 		return mobileNo;
 	}
 	public void setMobileNo(int mobileNo) {
 		this.mobileNo = mobileNo;
+	}
+	public List<RequestModel> getRequests() {
+		return requests;
+	}
+	public void setRequests(List<RequestModel> requests) {
+		this.requests = requests;
 	}
 	
 	
